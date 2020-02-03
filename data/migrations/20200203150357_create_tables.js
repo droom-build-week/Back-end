@@ -38,7 +38,7 @@ exports.up = function(knex) {
       table.text("industry").notNullable();
       table.text("password").notNullable();
       table
-        .integer("admins_id")
+        .integer("admin_id")
         .notNullable()
         .references("id")
         .inTable("admins")
@@ -102,8 +102,8 @@ exports.up = function(knex) {
         .unsigned()
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
-      table.integer("applicant_response").defaultTo(false);
-      table.integer("company_response").defaultTo(false);
+      table.boolean("applicant_response").defaultTo(false);
+      table.boolean("company_response").defaultTo(false);
     });
 };
 

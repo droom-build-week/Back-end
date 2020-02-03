@@ -7,13 +7,13 @@ exports.seed = function(knex) {
           company_name: "Lambda School",
           industry: "education",
           password: "test1234",
-          admins_id: 1
+          admin_id: 1
         },
         {
           company_name: "Codecademy",
           industry: "education",
           password: "test1234",
-          admins_id: 2
+          admin_id: 2
         }
       ]);
     });
