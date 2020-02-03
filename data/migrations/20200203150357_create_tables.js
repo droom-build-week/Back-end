@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema
     .createTable("users", table => {
       table.increments();
@@ -38,7 +38,7 @@ exports.up = function(knex) {
       table.text("industry").notNullable();
       table.text("password").notNullable();
       table
-        .integer("admins_id")
+        .integer("admin_id")
         .notNullable()
         .references("id")
         .inTable("admins")
@@ -58,9 +58,9 @@ exports.up = function(knex) {
       table.increments();
       table.text("title", 128).notNullable();
       table.text("description").notNullable();
-      table.text("sallary").notNullable();
+      table.text("salary").notNullable();
       table
-        .integer("companies_id")
+        .integer("company_id")
         .notNullable()
         .references("id")
         .inTable("companies")
@@ -95,19 +95,19 @@ exports.up = function(knex) {
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
       table
-        .integer("jobListings_id")
+        .integer("job_id")
         .notNullable()
         .references("id")
         .inTable("jobListings")
         .unsigned()
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
-      table.integer("applicant_response").defaultTo(false);
-      table.integer("company_response").defaultTo(false);
+      table.boolean("applicant_response").defaultTo(false);
+      table.boolean("company_response").defaultTo(false);
     });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema
     .dropTableIfExists("matches")
     .dropTableIfExists("jobListings")
