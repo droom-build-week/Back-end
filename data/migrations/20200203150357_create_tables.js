@@ -58,9 +58,9 @@ exports.up = function(knex) {
       table.increments();
       table.text("title", 128).notNullable();
       table.text("description").notNullable();
-      table.text("sallary").notNullable();
+      table.text("salary").notNullable();
       table
-        .integer("companies_id")
+        .integer("company_id")
         .notNullable()
         .references("id")
         .inTable("companies")
@@ -95,7 +95,7 @@ exports.up = function(knex) {
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
       table
-        .integer("jobListings_id")
+        .integer("job_id")
         .notNullable()
         .references("id")
         .inTable("jobListings")

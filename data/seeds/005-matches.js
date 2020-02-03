@@ -6,12 +6,12 @@ exports.seed = function(knex) {
         {
           applicant_id: 1,
           company_id: 1,
-          jobListings_id: 1
+          job_id: 1
         },
         {
           applicant_id: 2,
           company_id: 1,
-          jobListings_id: 2
+          job_id: 2
         }
       ]);
     });
