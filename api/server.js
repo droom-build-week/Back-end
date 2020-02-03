@@ -7,6 +7,6 @@ const app = express();
 
 rootMiddleware(app);
 
-app.use('/api', routes);
+app.use('/', routes);
 
 module.exports = app;
