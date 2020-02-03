@@ -9,8 +9,9 @@ exports.up = function(knex) {
         .notNullable();
       table.text("email").notNullable();
       table.text("occupation").notNullable();
+      table.text("profile_photo");
       table.text("password").notNullable();
-      table.integer("age");
+      table.integer("age").unsigned();
       table.text("past_experience");
       table.text("interests");
       table
@@ -22,7 +23,7 @@ exports.up = function(knex) {
         .notNullable()
         .defaultTo(knex.fn.now());
     })
-    .createTable("admin", table => {
+    .createTable("admins", table => {
       table.increments();
       table.text("full_name").notNullable();
       table.text("position").notNullable();
@@ -31,16 +32,19 @@ exports.up = function(knex) {
     .createTable("companies", table => {
       table.increments();
       table
-        .text("companie_name")
+        .text("company_name")
         .unique()
         .notNullable();
       table.text("industry").notNullable();
       table.text("password").notNullable();
       table
-        .integer("admin_id")
+        .integer("admins_id")
         .notNullable()
         .references("id")
-        .inTable("admin");
+        .inTable("admins")
+        .unsigned()
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       table
         .timestamp("created_at")
         .notNullable()
@@ -54,11 +58,15 @@ exports.up = function(knex) {
       table.increments();
       table.text("title", 128).notNullable();
       table.text("description").notNullable();
+      table.text("sallary").notNullable();
       table
         .integer("companies_id")
         .notNullable()
         .references("id")
-        .inTable("companies");
+        .inTable("companies")
+        .unsigned()
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       table
         .timestamp("created_at")
         .notNullable()
@@ -74,19 +82,28 @@ exports.up = function(knex) {
         .integer("applicant_id")
         .notNullable()
         .references("id")
-        .inTable("users");
+        .inTable("users")
+        .unsigned()
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       table
         .integer("company_id")
         .notNullable()
         .references("id")
-        .inTable("companies");
+        .inTable("companies")
+        .unsigned()
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       table
         .integer("jobListings_id")
         .notNullable()
         .references("id")
-        .inTable("jobListings");
-      table.text("applicant_response");
-      table.text("company_response");
+        .inTable("jobListings")
+        .unsigned()
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
+      table.integer("applicant_response").defaultTo(false);
+      table.integer("company_response").defaultTo(false);
     });
 };
 
@@ -94,7 +111,7 @@ exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists("matches")
     .dropTableIfExists("jobListings")
-    .dropTableIfExists("admin")
     .dropTableIfExists("companies")
+    .dropTableIfExists("admins")
     .dropTableIfExists("users");
 };
