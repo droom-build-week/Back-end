@@ -58,6 +58,7 @@ exports.up = function(knex) {
       table.increments();
       table.text("title", 128).notNullable();
       table.text("description").notNullable();
+      table.text("sallary").notNullable();
       table
         .integer("companies_id")
         .notNullable()
