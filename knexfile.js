@@ -26,5 +26,19 @@ module.exports = {
     seeds: {
       directory: "./data/seeds"
     }
-  }
+  },
+  production: {
+    client: "pg",
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      directory: "./data/migrations",
+      tableName: "dbmigrations"
+    },
+    seeds: { directory: "./data/seeds" },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run("PRAGMA foreign_keys = ON", done);
+      }
+    }
+  },
 };
