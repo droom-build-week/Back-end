@@ -2,7 +2,7 @@ const CompaniesDb = require('./companies-model');
 
 function createCompany(req, res) {
   const company = req.body;
-  const { id } = req.params;
+  const { id } = req.user;
 
   const newCompany = { ...company, admin_id: id }
 
@@ -12,8 +12,7 @@ function createCompany(req, res) {
     })
     .catch(err => {
       res.status(400).json({
-        errorMessage: err.message,
-        stack: err.stack
+        errorMessage: "An error occured while adding a company!",
       })
     });
 

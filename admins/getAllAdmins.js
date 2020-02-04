@@ -7,8 +7,7 @@ function getAllAdmins(req, res) {
     })
     .catch(err => {
       res.status(404).json({
-        errorMessage: err.message,
-        stack: err.stack,
+        errorMessage: "An error occured while retrieving admins!",
       })
     });
 }
