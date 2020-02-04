@@ -9,7 +9,7 @@ function validateRegInfoUser(req, res, next) {
     user.full_name === "" ||
     user.username === "" ||
     user.email === "" ||
-    user.password === "" ||
+    user.occupation === "" ||
     user.password === ""
   ) {
     res
