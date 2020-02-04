@@ -7,7 +7,7 @@ exports.up = function (knex) {
         .text("username")
         .unique()
         .notNullable();
-      table.text("email").notNullable();
+      table.text("email").unique().notNullable();
       table.text("occupation").notNullable();
       table.text("profile_photo");
       table.text("password").notNullable();
@@ -27,7 +27,9 @@ exports.up = function (knex) {
       table.increments();
       table.text("full_name").notNullable();
       table.text("position").notNullable();
-      table.text("email").notNullable();
+      table.text("email")
+        .unique()
+        .notNullable();
       table.text("password").notNullable();
     })
     .createTable("companies", table => {
@@ -61,10 +63,10 @@ exports.up = function (knex) {
       table.text("salary").notNullable();
       table
         .integer("company_id")
+        .unsigned()
         .notNullable()
         .references("id")
         .inTable("companies")
-        .unsigned()
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
       table
@@ -80,26 +82,26 @@ exports.up = function (knex) {
       table.increments();
       table
         .integer("applicant_id")
+        .unsigned()
         .notNullable()
         .references("id")
         .inTable("users")
-        .unsigned()
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
       table
         .integer("company_id")
+        .unsigned()
         .notNullable()
         .references("id")
         .inTable("companies")
-        .unsigned()
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
       table
         .integer("job_id")
+        .unsigned()
         .notNullable()
         .references("id")
         .inTable("jobListings")
-        .unsigned()
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
       table.boolean("applicant_response").defaultTo(false);

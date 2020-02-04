@@ -9,7 +9,8 @@ async function add(admin) {
 
   return db('admins')
     .where({ id })
-    .first();
+    .first()
+    .select('id', 'full_name');
 }
 
 module.exports = {
