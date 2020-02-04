@@ -79,25 +79,19 @@ router.post("/login", validateLoginInfoUser, (req, res) => {
 
 
 router.post('/register-admin', validateRegInfo, (req, res) => {
-  const { full_name, email, position, password } = req.body;
+  const admin = req.body;
 
-  const passwordHash = bcrypt.hashSync(password, 10);
+  const passwordHash = bcrypt.hashSync(admin.password, 10);
 
-  const admin = {
-    full_name,
-    email,
-    position,
-    password: passwordHash
-  }
+  const newAdmin = { ...admin, password: passwordHash }
 
-  AdminsDb.add(admin)
+  AdminsDb.add(newAdmin)
     .then(savedAdmin => {
       res.status(201).json(savedAdmin);
     })
     .catch(err => {
       res.status(500).json({
         errorMessage: "Admin account couldn't be created!",
-        stack: err.stack,
       })
     })
 })
@@ -121,8 +115,7 @@ router.post('/login-admin', validateLoginInfo, (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        errorMessage: err.message,
-        stack: err.stack,
+        errorMessage: "Login unsuccessful!",
       })
     })
 })

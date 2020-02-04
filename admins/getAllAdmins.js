@@ -1,14 +1,13 @@
 const AdminDb = require('./admins-model');
 
 function getAllAdmins(req, res) {
-  AdminDb.getAll()
+  AdminDb.findAll()
     .then(admins => {
       res.status(200).json(admins);
     })
     .catch(err => {
       res.status(404).json({
-        errorMessage: err.message,
-        stack: err.stack,
+        errorMessage: "An error occured while retrieving admins!",
       })
     });
 }

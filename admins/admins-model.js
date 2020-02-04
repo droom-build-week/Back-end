@@ -1,6 +1,6 @@
 const db = require('../data/db-config');
 
-function getAll() {
+function findAll() {
   return db('admins');
 }
 
@@ -9,8 +9,7 @@ async function add(admin) {
 
   return db('admins')
     .where({ id })
-    .first()
-    .select('id', 'full_name');
+    .first();
 }
 
 function findBy(filter) {
@@ -19,8 +18,16 @@ function findBy(filter) {
     .first();
 }
 
+function findById(id) {
+  return db('admins')
+    .where({ id })
+    .first();
+}
+
+
 module.exports = {
-  getAll,
+  findAll,
   add,
-  findBy
+  findBy,
+  findById
 }

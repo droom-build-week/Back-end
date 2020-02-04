@@ -24,7 +24,7 @@ function validateLoginInfo(req, res, next) {
       message: 'Invalid user credentials!',
     })
   } else if (admin.email === "" || admin.password === "") {
-    res.status(400).json({ message: 'Please enter your email or password to login!' })
+    res.status(400).json({ message: 'Please enter your email and password to login!' })
   } else {
     next();
   }
