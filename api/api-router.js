@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
 const authRouter = require('../auth/auth-router');
 const usersRouter = require('../users/users-router');
@@ -8,8 +8,8 @@ router.use('/api/auth', authRouter);
 router.use('/api/users', usersRouter);
 router.use('/api/companies', companiesRouter);
 
-router.get('/', (req, res) => {
-  res.send(`Welcome to Droom's API service! 😁`)
-})
+router.get("/", (req, res) => {
+  res.send(`Welcome to Droom's API service! 😁`);
+});
 
 module.exports = router;
