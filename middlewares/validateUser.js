@@ -30,7 +30,7 @@ function validateLoginInfoUser(req, res, next) {
   } else if (user.username === "" || user.password === "") {
     res
       .status(400)
-      .json({ message: "Please enter your username or password to login!" });
+      .json({ message: "Please enter your username and password to login!" });
   } else {
     next();
   }

@@ -1,9 +1,11 @@
 const AdminDb = require('./admins-model');
 
-function getAllAdmins(req, res) {
-  AdminDb.findAll()
-    .then(admins => {
-      res.status(200).json(admins);
+function getAdmin(req, res) {
+  const { id } = req.params;
+
+  AdminDb.findById(id)
+    .then(admin => {
+      res.status(200).json(admin);
     })
     .catch(err => {
       res.status(404).json({
@@ -13,4 +15,4 @@ function getAllAdmins(req, res) {
     });
 }
 
-module.exports = getAllAdmins;
+module.exports = getAdmin;

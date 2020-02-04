@@ -5,6 +5,7 @@ function getAll() {
 }
 
 async function add(company) {
+
   const [id] = await db('companies').insert(company, 'id');
   
   return db('companies')
