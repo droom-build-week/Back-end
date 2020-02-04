@@ -13,7 +13,14 @@ async function add(admin) {
     .select('id', 'full_name');
 }
 
+function findBy(filter) {
+  return db('admins')
+    .where(filter)
+    .first();
+}
+
 module.exports = {
   getAll,
-  add
+  add,
+  findBy
 }
