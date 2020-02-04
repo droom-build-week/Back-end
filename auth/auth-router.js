@@ -3,8 +3,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const Users = require("../users/users-model");
+const {
+  validateRegInfoUser,
+  validateLoginInfoUser
+} = require("../middlewares/validateUser");
 
-function makeToken(user) {
+function makeUserToken(user) {
   const payload = {
     sub: user.id,
     username: user.username
@@ -12,15 +16,11 @@ function makeToken(user) {
   const options = {
     expiresIn: "1d"
   };
-  const token = jwt.sign(
-    payload,
-    process.env.JWT_SECRET || "thesecret",
-    options
-  );
+  const token = jwt.sign(payload, process.env.JWT_SECRET, options);
   return token;
 }
 
-router.post("/register", (req, res) => {
+router.post("/register", validateRegInfoUser, (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
@@ -36,14 +36,14 @@ router.post("/register", (req, res) => {
     });
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", validateLoginInfoUser, (req, res) => {
   let { username, password } = req.body;
 
   Users.findby({ username })
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        const Token = makeToken(user);
+        const Token = makeUserToken(user);
         res.status(200).json({
           message: `Hello ${user.username}`,
           Token

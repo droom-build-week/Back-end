@@ -8,7 +8,7 @@ function getUserById(req, res) {
         res.status(200).json(user);
       } else {
         res.status(404).json({
-          message: "Couldn't find user with this id"
+          message: "There was an error retrieving this user"
         });
       }
     })
