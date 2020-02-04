@@ -1,7 +1,9 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const getAllUsers = require('./getAllUsers');
+const getAllUsers = require("./getAllUsers");
 
-router.get('/', getAllUsers);
+const restricted = require("../auth/restricted-middleware");
+
+router.get("/", restricted, getAllUsers);
 
 module.exports = router;
