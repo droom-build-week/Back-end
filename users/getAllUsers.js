@@ -1,7 +1,7 @@
 const UsersDb = require('./users-model');
 
 function getAllUsers(req, res) {
-  UsersDb.findAllUsers()
+  UsersDb.find()
     .then(users => {
       res.status(200).json(users)
     })
