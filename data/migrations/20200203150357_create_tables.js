@@ -28,6 +28,7 @@ exports.up = function (knex) {
       table.text("full_name").notNullable();
       table.text("position").notNullable();
       table.text("email").notNullable();
+      table.text("password").notNullable();
     })
     .createTable("companies", table => {
       table.increments();
@@ -36,7 +37,6 @@ exports.up = function (knex) {
         .unique()
         .notNullable();
       table.text("industry").notNullable();
-      table.text("password").notNullable();
       table
         .integer("admin_id")
         .notNullable()

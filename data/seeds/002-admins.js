@@ -6,12 +6,14 @@ exports.seed = function(knex) {
         {
           full_name: "Remi Becheru",
           position: "TL",
-          email: "Remi.Becheru@test.com"
+          email: "Remi.Becheru@test.com",
+          password: "test1234",
         },
         {
           full_name: "Matt Locklin",
           position: "SL",
-          email: "Matt.Locklin@test.com"
+          email: "Matt.Locklin@test.com",
+          password: "test1234",
         }
       ]);
     });
