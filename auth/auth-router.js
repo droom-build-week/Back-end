@@ -48,7 +48,7 @@ router.post('/register-admin', validateRegInfo, (req, res) => {
 router.post('/login-admin', validateLoginInfo, (req, res) => {
   const { email, password } = req.body;
 
-  AdminsDb.findBy(email)
+  AdminsDb.findBy({ email })
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = makeAdminToken(user);
