@@ -13,7 +13,6 @@ function getCompany(req, res) {
         stack: err.stack
       })
     })
-
 }
 
 module.exports = getCompany;

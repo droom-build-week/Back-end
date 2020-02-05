@@ -109,7 +109,7 @@ router.post('/login-admin', validateLoginInfo, (req, res) => {
         })
       } else {
         res.status(500).json({
-          message: "User not found!"
+          message: "Admin not found!"
         })
       }
     })
@@ -119,8 +119,6 @@ router.post('/login-admin', validateLoginInfo, (req, res) => {
       })
     })
 })
-
-
 
 
 module.exports = router;
