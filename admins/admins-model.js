@@ -24,10 +24,24 @@ function findById(id) {
     .first();
 }
 
+function findCompaniesForAdmin(admin_id) {
+  return db('admins as a')
+    .join('companies as c', 'c.admin_id', 'a.id')
+    .where({ admin_id })
+    .select(
+      'a.id as admin_id',
+      'a.full_name as admin_name',
+      'a.position as admin_role',
+      'a.email as admin_email',
+      'c.id as company_id',
+      'company_name',
+      'industry')
+}
 
 module.exports = {
   findAll,
   add,
   findBy,
-  findById
+  findById,
+  findCompaniesForAdmin
 }
