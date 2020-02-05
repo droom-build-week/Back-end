@@ -1,12 +1,18 @@
-const router = require('express').Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const router = require("express").Router();
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const Users = require("../users/users-model");
-const { validateRegInfoUser, validateLoginInfoUser } = require("../middlewares/validateUser");
+const {
+  validateRegInfoUser,
+  validateLoginInfoUser
+} = require("../middlewares/validateUser");
 
-const AdminsDb = require('../admins/admins-model');
-const { validateRegInfo, validateLoginInfo } = require('../middlewares/validateAdmin');
+const AdminsDb = require("../admins/admins-model");
+const {
+  validateRegInfo,
+  validateLoginInfo
+} = require("../middlewares/validateAdmin");
 
 function makeUserToken(user) {
   const payload = {
@@ -27,14 +33,13 @@ function makeAdminToken(user) {
   };
 
   const options = {
-    expiresIn: '1d',
-  }
+    expiresIn: "1d"
+  };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, options);
 
   return token;
 }
-
 
 router.post("/register", validateRegInfoUser, (req, res) => {
   let user = req.body;
@@ -77,13 +82,12 @@ router.post("/login", validateLoginInfoUser, (req, res) => {
     });
 });
 
-
-router.post('/register-admin', validateRegInfo, (req, res) => {
+router.post("/register-admin", validateRegInfo, (req, res) => {
   const admin = req.body;
 
   const passwordHash = bcrypt.hashSync(admin.password, 10);
 
-  const newAdmin = { ...admin, password: passwordHash }
+  const newAdmin = { ...admin, password: passwordHash };
 
   AdminsDb.add(newAdmin)
     .then(savedAdmin => {
@@ -91,12 +95,12 @@ router.post('/register-admin', validateRegInfo, (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        errorMessage: "Admin account couldn't be created!",
-      })
-    })
-})
+        errorMessage: "Admin account couldn't be created!"
+      });
+    });
+});
 
-router.post('/login-admin', validateLoginInfo, (req, res) => {
+router.post("/login-admin", validateLoginInfo, (req, res) => {
   const { email, password } = req.body;
 
   AdminsDb.findBy({ email })
@@ -105,22 +109,19 @@ router.post('/login-admin', validateLoginInfo, (req, res) => {
         const token = makeAdminToken(user);
         res.status(200).json({
           message: `Welcome ${user.full_name}!`,
-          token,
-        })
+          token
+        });
       } else {
         res.status(500).json({
           message: "User not found!"
-        })
+        });
       }
     })
     .catch(err => {
       res.status(500).json({
-        errorMessage: "Login unsuccessful!",
-      })
-    })
-})
-
-
-
+        errorMessage: "Login unsuccessful!"
+      });
+    });
+});
 
 module.exports = router;
