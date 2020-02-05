@@ -1,8 +1,8 @@
 const Matches = require("./matches-model");
 
-function getMatchesById(req, res) {
+function getMatchesByUsersId(req, res) {
   const { id } = req.params;
-  Matches.findById(id)
+  Matches.findByUserId(id)
     .then(matches => {
       if (matches) {
         res.status(200).json(matches);
@@ -19,4 +19,4 @@ function getMatchesById(req, res) {
     });
 }
 
-module.exports = getMatchesById;
+module.exports = getMatchesByUsersId;
