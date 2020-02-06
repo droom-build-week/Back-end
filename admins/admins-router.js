@@ -17,8 +17,11 @@ const validateJobListing = require("../middlewares/validateJobListing");
 const validateCompanyId = require('../middlewares/validateCompanyId')
 
 // PUT helpers
-const deleteJobListing = require("../jobListings/deleteJobListing");
 const updateJobListing = require("../jobListings/updateJobListing");
+const editCompany = require("../companies/editCompany");
+
+// DELETE helpers
+const deleteJobListing = require("../jobListings/deleteJobListing");
 
 
 // Admins
@@ -27,8 +30,12 @@ router.get("/:id", validateAdminId, getAdmin);
 
 // Admins => Companies
 router.post("/:id/add-company", validateAdminId, validateCompany, createCompany);
-router.get('/:id/companies', validateAdminId, getCompanies);
-router.get('/:id/companies/:companyId', validateCompanyId, validateAdminId, getACompany);
+router.get("/:id/companies", validateAdminId, getCompanies);
+router.get("/:id/companies/:companyId", validateCompanyId, validateAdminId, getACompany);
+router.put("/:id/companies/:companyId", validateCompanyId, validateAdminId, editCompany);
+
+// Edit Company
+// Delete Company
 
 // Admins => Companies => Listings
 router.post("/:id/add-joblisting", validateJobListing, validateAdminId, createJobListing);
