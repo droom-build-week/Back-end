@@ -1,9 +1,9 @@
 const CompaniesDb = require('../companies/companies-model');
 
 async function validateCompanyId(req, res, next) {
-  const { id } = req.params;
+  const { companyId } = req.params;
 
-  const company = await CompaniesDb.findById(id);
+  const company = await CompaniesDb.findById(companyId);
 
   if (company) {
     req.company = company;

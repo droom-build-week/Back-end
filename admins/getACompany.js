@@ -6,6 +6,11 @@ function getACompany(req, res) {
 
   AdminsDb.findSingleCompanyAdmin(adminId, companyId)
     .then(company => {
+      if (!company) {
+        res.status(403).json({
+          message: "You don't have access to this company!"
+        })
+      }
       res.status(200).json(company)
     })
     .catch(err => {
@@ -15,9 +20,5 @@ function getACompany(req, res) {
       })
     })
 }
-
-// if(adminId !== req.company.admin_id) {
-
-// } else if(companyId !== req.)
 
 module.exports = getACompany;

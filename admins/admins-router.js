@@ -14,9 +14,7 @@ router.get('/', getAllAdmins);
 router.get('/:id', validateAdminId, getAdmin);
 router.post('/:id/add-company', validateAdminId, validateCompany, createCompany);
 router.get('/:id/companies', validateAdminId, getCompanies);
-router.get('/:id/companies/:id', validateAdminId, validateCompanyId, getACompany);
-
-
+router.get('/:id/companies/:companyId', validateCompanyId, validateAdminId, getACompany);
 
 
 module.exports = router;
