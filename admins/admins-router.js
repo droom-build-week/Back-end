@@ -32,7 +32,7 @@ router.get("/:id", validateAdminId, getAdmin);
 router.post("/:id/add-company", validateAdminId, validateCompany, createCompany);
 router.get("/:id/companies", validateAdminId, getCompanies);
 router.get("/:id/companies/:companyId", validateCompanyId, validateAdminId, getACompany);
-router.put("/:id/companies/:companyId", validateCompanyId, validateAdminId, editCompany);
+router.put("/:id/companies/:companyId/edit", validateCompanyId, validateAdminId, validateCompany, editCompany);
 
 // Edit Company
 // Delete Company

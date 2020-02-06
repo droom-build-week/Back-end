@@ -7,9 +7,15 @@ function findAll() {
 async function add(admin) {
   const [id] = await db('admins').insert(admin, 'id');
 
-  return db('admins')
+  return db('admins as a')
     .where({ id })
-    .first();
+    .first()
+    .select(
+      'a.id',
+      'a.full_name',
+      'a.position',
+      'a.email'
+    );
 }
 
 function findBy(filter) {
@@ -46,7 +52,6 @@ function findSingleCompanyAdmin(admin_id, company_id) {
       'c.id as company_id',
       'company_name',
       'industry',
-      'c.id as admin_id',
       'a.full_name as admin_name',
       'c.created_at',
       'c.updated_at'
@@ -60,5 +65,5 @@ module.exports = {
   findBy,
   findById,
   findCompaniesForAdmin,
-  findSingleCompanyAdmin
+  findSingleCompanyAdmin,
 }
