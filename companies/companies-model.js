@@ -18,8 +18,22 @@ function findById(id){
     .first();
 }
 
+function updateCompany(changes, id) {
+  return db('companies')
+    .update(changes)
+    .where({ id });
+}
+
+function removeCompany(id) {
+  return db('companies')
+    .where({ id })
+    .del();
+}
+
 module.exports = {
   getAll,
   add,
-  findById
+  findById,
+  updateCompany,
+  removeCompany
 }
