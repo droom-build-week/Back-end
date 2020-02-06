@@ -54,10 +54,6 @@ function findSingleCompanyAdmin(admin_id, company_id) {
     .first();
 }
 
-// stringify
-// parse
-// concatenate
-
 module.exports = {
   findAll,
   add,

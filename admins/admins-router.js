@@ -16,5 +16,7 @@ router.post('/:id/add-company', validateAdminId, validateCompany, createCompany)
 router.get('/:id/companies', validateAdminId, getCompanies);
 router.get('/:id/companies/:id', validateAdminId, validateCompanyId, getACompany);
 
+
+
+
 module.exports = router;
-// '/api/admins/:id/companies/:id'
