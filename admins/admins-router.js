@@ -1,20 +1,38 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const getAllAdmins = require('./getAllAdmins');
-const getAdmin = require('./getAdmin');
-const createCompany = require('../companies/createCompany');
+// GET helpers
+const getAllAdmins = require("./getAllAdmins");
+const getAdmin = require("./getAdmin");
 const getCompanies = require('../admins/getCompanies');
 const getACompany = require('../admins/getACompany')
 
-const validateAdminId = require('../middlewares/validateAdminId');
-const validateCompany = require('../middlewares/validateCompany');
+// POST helpers
+const createCompany = require("../companies/createCompany");
+const createJobListing = require("../jobListings/createJobListing");
+
+// Validation helpers
+const validateAdminId = require("../middlewares/validateAdminId");
+const validateCompany = require("../middlewares/validateCompany");
+const validateJobListing = require("../middlewares/validateJobListing");
 const validateCompanyId = require('../middlewares/validateCompanyId')
 
-router.get('/', getAllAdmins);
-router.get('/:id', validateAdminId, getAdmin);
-router.post('/:id/add-company', validateAdminId, validateCompany, createCompany);
+// PUT helpers
+const deleteJobListing = require("../jobListings/deleteJobListing");
+const updateJobListing = require("../jobListings/updateJobListing");
+
+
+// Admins
+router.get("/", getAllAdmins);
+router.get("/:id", validateAdminId, getAdmin);
+
+// Admins => Companies
+router.post("/:id/add-company", validateAdminId, validateCompany, createCompany);
 router.get('/:id/companies', validateAdminId, getCompanies);
 router.get('/:id/companies/:companyId', validateCompanyId, validateAdminId, getACompany);
 
+// Admins => Companies => Listings
+router.post("/:id/add-joblisting", validateJobListing, validateAdminId, createJobListing);
+router.delete("/:id/delete-joblisting/:jobListing_id", validateAdminId, deleteJobListing);
+router.put("/:id/update-joblisting/:jobListing_id", validateAdminId, updateJobListing);
 
 module.exports = router;

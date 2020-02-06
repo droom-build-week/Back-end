@@ -1,11 +1,9 @@
-exports.up = function (knex) {
+exports.up = function(knex) {
   return knex.schema
     .createTable("users", table => {
       table.increments();
       table.string("full_name").notNullable();
-      table
-        .string("username")
-        .notNullable();
+      table.string("username").notNullable();
       table.string("email").notNullable();
       table.string("occupation").notNullable();
       table.string("profile_photo");
@@ -21,21 +19,21 @@ exports.up = function (knex) {
         .timestamp("updated_at")
         .notNullable()
         .defaultTo(knex.fn.now());
-      table.unique(['username', 'email']);
+      table.unique(["username", "email"]);
     })
     .createTable("admins", table => {
       table.increments();
       table.string("full_name").notNullable();
       table.string("position").notNullable();
-      table.string("email").notNullable();
+      table
+        .string("email")
+        .unique()
+        .notNullable();
       table.string("password").notNullable();
-      table.unique('email');
     })
     .createTable("companies", table => {
       table.increments();
-      table
-        .string("company_name")
-        .notNullable();
+      table.string("company_name").notNullable();
       table.string("industry").notNullable();
       table
         .integer("admin_id")
@@ -53,7 +51,7 @@ exports.up = function (knex) {
         .timestamp("updated_at")
         .notNullable()
         .defaultTo(knex.fn.now());
-      table.unique('company_name');
+      table.unique("company_name");
     })
     .createTable("jobListings", table => {
       table.increments();
@@ -108,7 +106,7 @@ exports.up = function (knex) {
     });
 };
 
-exports.down = function (knex) {
+exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists("matches")
     .dropTableIfExists("jobListings")
