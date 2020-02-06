@@ -47,19 +47,29 @@ describe('Hobbits Model', () => {
     })
   })
 
-  // describe("** FIND ADMIN BY FILTER **", () => {
-  //   test('should return correct admin on filtering', async () => {
-  //     const admin = await Admins.findBy({ full_name: "Jon Snow" });
+  describe("** FIND ADMIN BY FILTER **", () => {
+    test('should return correct admin on filtering', async () => {
+      const jon = await Admins.add({
+        "full_name": "Jon Snow",
+        "position": "Technical Recruiter",
+        "email": "jon@snow.com",
+        "password": "1234"
+      })
 
-  //     expect(admin).toMatchObject({
-  //       "full_name": "Jon Snow",
-  //       "position": "Technical Recruiter",
-  //       "email": "jon@snow.com",
-  //       "password": "1234"
-  //     })
-  //   })
+      const email = jon.email;
+
+      const admin = await Admins.findBy({ email });
+      console.log(admin)
+
+      expect(admin).toMatchObject({
+        "full_name": "Jon Snow",
+        "position": "Technical Recruiter",
+        "email": "jon@snow.com",
+        "password": "1234"
+      })
+    })
     
-  // })
+  })
   
 
 
