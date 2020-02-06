@@ -2,7 +2,7 @@ const AdminsDb = require('../admins/admins-model');
 
 async function validateAdminId(req, res, next) {
   const { id } = req.params;
-  // const ids = req.params
+  
   const admin = await AdminsDb.findById(id);
 
   if (admin) {

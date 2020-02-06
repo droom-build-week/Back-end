@@ -1,9 +1,9 @@
 const AdminDb = require('./admins-model');
 
-const getAllAdmins = async (req, res) => {
+const getAllAdmins = (req, res) => {
   AdminDb.findAll()
-    .then(admin => {
-      res.status(200).json(admin)
+    .then(admins => {
+      res.status(200).json(admins)
     })
     .catch(err => {
       res.status(404).json({
