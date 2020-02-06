@@ -24,9 +24,16 @@ function updateCompany(changes, id) {
     .where({ id });
 }
 
+function removeCompany(id) {
+  return db('companies')
+    .where({ id })
+    .del();
+}
+
 module.exports = {
   getAll,
   add,
   findById,
-  updateCompany
+  updateCompany,
+  removeCompany
 }

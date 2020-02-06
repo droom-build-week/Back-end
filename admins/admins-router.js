@@ -22,6 +22,7 @@ const editCompany = require("../companies/editCompany");
 
 // DELETE helpers
 const deleteJobListing = require("../jobListings/deleteJobListing");
+const deleteCompany = require("../companies/deleteCompany");
 
 
 // Admins
@@ -33,8 +34,8 @@ router.post("/:id/add-company", validateAdminId, validateCompany, createCompany)
 router.get("/:id/companies", validateAdminId, getCompanies);
 router.get("/:id/companies/:companyId", validateCompanyId, validateAdminId, getACompany);
 router.put("/:id/companies/:companyId/edit", validateCompanyId, validateAdminId, validateCompany, editCompany);
+router.delete("/:id/companies/:companyId/remove", validateCompanyId, validateAdminId, deleteCompany);
 
-// Edit Company
 // Delete Company
 
 // Admins => Companies => Listings
