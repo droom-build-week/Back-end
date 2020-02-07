@@ -9,8 +9,7 @@ function getCompany(req, res) {
     })
     .catch(err => {
       res.status(404).json({
-        errorMessage: err.message,
-        stack: err.stack
+        errorMessage: "Unexpected error occurred while getting this company! Try again... If problem persists ask Google"
       })
     })
 }

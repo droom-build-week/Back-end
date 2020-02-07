@@ -7,8 +7,7 @@ const getAllAdmins = (req, res) => {
     })
     .catch(err => {
       res.status(404).json({
-        errorMessage: err.message,
-        stack: err.stack
+        errorMessage: "Could not get a list of admins! If problem persists... Ask Google"
       })
     })
 }
