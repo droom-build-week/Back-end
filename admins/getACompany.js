@@ -15,8 +15,7 @@ function getACompany(req, res) {
     })
     .catch(err => {
       res.status(404).json({
-        errorMessage: err.message,
-        stack: err.stack
+        errorMessage: "There was an error getting this company!"
       })
     })
 }

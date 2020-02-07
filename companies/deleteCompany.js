@@ -11,8 +11,7 @@ function deleteCompany(req, res) {
     })
     .catch(err => {
       res.status(500).json({
-        message: "Company could not be edited!",
-        stack: err.stack
+        message: "Company could not be edited!"
       })
     })
 }
