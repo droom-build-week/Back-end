@@ -43,11 +43,11 @@ function findCompaniesForAdmin(admin_id) {
       'c.updated_at')
 }
 
-function findSingleCompanyAdmin(admin_id, company_id) {
+function findSingleCompanyAdmin(admin_id, id) {
 
   return db('admins as a')
     .join('companies as c', 'a.id', 'c.admin_id')
-    .where({ admin_id, company_id })
+    .where({ 'c.admin_id': admin_id, 'c.id': id })
     .select(
       'c.id as company_id',
       'company_name',
